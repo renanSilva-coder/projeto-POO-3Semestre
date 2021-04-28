@@ -13,7 +13,7 @@
 <body>
 <div class="text-center">
     <div class="container">
-    <a href="../usuario/cadastro.php">
+    <a href="views/cadastro_tpl.php">
     <input  type="button" 
             class="btn btn-md btn-primary text-uppercase font-weight-bold" 
             name="cadastrar-se" 

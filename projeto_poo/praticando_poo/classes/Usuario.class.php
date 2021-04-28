@@ -6,8 +6,9 @@ require_once(__DIR__ . '/abstratas/TipoPessoa.class.php');
 class Usuario extends TipoPessoa implements iUsuario{
    
     protected $id;
-    protected $nome; 
-    protected $cpf; 
+    protected $nome;
+    protected $cpf;
+    protected $email; 
 
     public function __construct(){
         parent::__construct();//executa o método construtor da classe que estou herdando, neste caso o construtor da classe TipoPessoa
@@ -79,6 +80,26 @@ class Usuario extends TipoPessoa implements iUsuario{
             return true;
         }
         return false;
+    }
+
+    public function inserir($dados){
+        try{
+            $this->nome = $dados['nome'];
+            $this->cpf = $dados['cpf'];
+            $this->email = $dados['email'];
+
+            $stmt = $this->prepare("INSERT INTO usuario
+                                        (nome, cpf, email)
+                                    VALUES
+                                        (:nome, :cpf, :email)");
+
+            if($stmt->execute([':nome'=>$this->nome, ':cpf'=>$this->cpf, ':email'=>$this->email])){
+                return true;
+            }
+        return false;
+        }catch (PDOException $erro){
+            return 'Erro: '.$erro->getMessage();
+        }
     }
 
     public function getDados(int $id_usuario): array{

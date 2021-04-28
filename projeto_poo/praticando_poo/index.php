@@ -11,16 +11,15 @@ class Main {
     private $objFabricante;
 
     public function __construct(){
-        echo "\n\n --- COMEÇO DO PROGRAMA --- \n\n"; 
  
         $this->objUsuario = new Usuario;
         $this->objFabricante = new Fabricante;
         $this->objAvaliacao = new Avaliacao;
  
-         $this->listaTudo();
+        $this->listaTudo();
 
-         $this->verificaSeExisteArgumento(1);
-         $this->executaOperacao($_SERVER['argv'][1]);
+        $this->verificaSeExisteArgumento(1);
+        $this->executaOperacao($_SERVER['argv'][1]);
      }
  
      private function executaOperacao(string $operacao){
@@ -57,7 +56,7 @@ class Main {
         
 
      }
- 
+
      private function apagaUsuario(){
  
          $dados = $this->tratarDados();
@@ -105,11 +104,12 @@ class Main {
          if(!isset($_SERVER['argv'][$numArg])){  
              
              if( $numArg == 1){ 
-                 $msg  = "PARA UTILIZAR O PROGRAMA DIGITE: \nphp estoque.php [operacao]";
+                 $msg  = "";
+                 // $msg  = "PARA UTILIZAR O PROGRAMA DIGITE: \nphp estoque.php [operacao]";
              }else{
                  $msg = "PARA UTILIZAR O PROGRAMA DIGITE: \nphp estoque.php [operacao] [dado=valor,dado2=valor2]";
              }
-             echo "\n\nERRO: $msg\n\n";
+             // echo "\n\nERRO: $msg\n\n";
              exit();
          }
      }
@@ -132,9 +132,6 @@ class Main {
  
      public function __destruct(){
  
-         sleep(1);
- 
-         echo "\n\n --- FIM DO PROGRAMA --- \n\n"; 
      }
 }
 

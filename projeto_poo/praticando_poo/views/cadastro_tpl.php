@@ -1,3 +1,16 @@
+<?php 
+require_once '../classes/Usuario.class.php';
+$objUsuario = new Usuario();
+
+if(isset($_POST['cadastrar'])) {
+  if($objUsuario->inserir($_POST)){
+    header("location: /projeto_POO_3Semestre/projeto_poo/praticando_poo/");
+  }else{
+    echo "<script type='text/javascript'> alert('Erro no cadastro'); </script>";
+  }
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +26,7 @@
   
   <h1 class="container pt-sm-4">CADASTRE SUA CONTA :-)</h1>
 
-  <form method="post" action="cadastro.php" enctype="multipart/form-data">
+  <form method="post" action="cadastro_tpl.php" enctype="multipart/form-data">
     <div class="text-danger">
       <?php
       // echo '<p>'; 
@@ -31,16 +44,20 @@
         <input type="text" class="form-control" id="nome" placeholder="Seu Nome..." name="nome" required>
       </div>
       <div class="form-group col-md-6">
+        <label for="cpf">CPF</label>
+        <input type="cpf" class="form-control" id="cpf" placeholder="cpf" name="cpf" required>
+      </div>
+      <div class="form-group col-md-6">
         <label for="email">Email</label>
         <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
       </div>
       <div class="form-group col-md-6">
         <label for="senha">Senha</label>
-        <input type="password" class="form-control" id="senha" placeholder="Senha" name="senha" required>
+        <input type="password" class="form-control" id="senha" placeholder="Senha" name="senha">
       </div>
       <div class="form-group col-md-6">
         <label for="conf_senha">Confirme a senha</label>
-        <input type="password" class="form-control" id="conf_senha" placeholder="Confirme sua senha" name="conf_senha" required>
+        <input type="password" class="form-control" id="conf_senha" placeholder="Confirme sua senha" name="conf_senha">
       </div>  
     </div>
     <input type='submit' class='btn btn-outline-dark font-weight-bold text-uppercase' name='cadastrar' value='Cadastrar'>
