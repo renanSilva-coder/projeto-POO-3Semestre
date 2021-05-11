@@ -1,0 +1,48 @@
+<div class="pt-2"><?php include 'index_menu_tpl.php'; ?></div>
+<div class="container p-sm-2 text-center">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <h1 class="container pt-sm-3">EDITAR USUÁRIO :-)</h1>
+
+  <form method="post">
+
+    <div class="text-success">
+      <?php
+        if ( isset($editado_ok) ) {
+          echo "<p>Editado com sucesso!</p>";
+        }
+      ?>  
+    </div>
+      <div class="row text-danger">
+        <?php
+          if(isset($erros)){ 
+            if(count($erros) > 0){//conta quantos indices tem num vetor, ou seja se for 0, não tem mensagem, se for 1 ou mais ja tem, e como pode ter + q 1 fazemos um foreach para criar um looping que exibe todos
+              foreach ($erros as $erro) { 
+                echo '<p>'.$erro.'</p>'; 
+              }
+            }
+          }
+        ?>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputNome">Nome Completo</label>
+          <input type="text" class="form-control" id="inputNome" placeholder="Seu Nome..." name="nome" value="<?php ?>" required>
+        </div>
+      <div class="form-group col-md-6">
+        <label for="inputEmail">Email</label>
+        <input type="email" class="form-control" id="inputEmail" placeholder="Email" name="email" value="<?php  ?>"required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputSenha">Senha</label>
+        <input type="password" class="form-control" id="inputSenha" placeholder="Senha" name="senha" value="" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="conf_senha">Confirme a senha</label>
+        <input type="password" class="form-control" id="conf_senha" placeholder="Confirme sua senha" name="conf_senha" value="" required>
+      </div>
+      </div>
+
+      <input type="hidden" name="id" value="<?php  ?>">
+      <input type='submit' class='btn btn-outline-dark font-weight-bold' name='gravar' value='Gravar'>
+  </form>
+</div>
