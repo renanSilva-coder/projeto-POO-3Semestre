@@ -2,16 +2,19 @@
 
 require(__DIR__ . '/../interfaces/usuario.interface.php');
 require_once(__DIR__ . '/abstratas/TipoPessoa.class.php');
+require_once(__DIR__ . '/abstratas/Crud.class.php');
 
 class Usuario extends TipoPessoa implements iUsuario{
    
     protected $id;
     protected $nome;
     protected $cpf;
-    protected $email; 
+    protected $email;
+    protected $objCrud;
 
     public function __construct(){
         parent::__construct();//executa o método construtor da classe que estou herdando, neste caso o construtor da classe TipoPessoa
+        $this->objCrud = new Crud;
     }
 
     public function setDados(array $dados): bool{
@@ -22,36 +25,15 @@ class Usuario extends TipoPessoa implements iUsuario{
         return true;
     }
 
-    public function gravarDados(): bool{
-      
-        if (empty($this->id)){//verifica se o id é vazio
-            return $this->insert();
-        }else{
-            return $this->update();
-        }
-    
+    public function getAll(): array{
+        $stmt = $this->prepare("SELECT * FROM usuario");
+        
+        $stmt->execute();
+         
+        return $stmt->fetchAll(); 
+        
     }
 
-    public function delete(): bool{
-        if($this->id){
-            
-            $stmt = $this->prepare("DELETE FROM usuario WHERE id = :id");
-            
-            if( $stmt->execute( [':id'=>$this->id] ) ){
-             
-                return true;
-            
-            }else{
-               
-                return false;
-            }
-        
-        }else{
-         
-            return false;
-       
-        }
-    }
 
     public function update(){
         $stmt = $this->prepare("UPDATE 
@@ -70,16 +52,20 @@ class Usuario extends TipoPessoa implements iUsuario{
         return false;
     }
 
-    public function insert(){
-        $stmt = $this->prepare("INSERT INTO usuario
-                                    (nome, cpf)
-                                VALUES
-                                    (:nome,:cpf)");
-
-        if($stmt->execute([':nome'=>$this->nome, ':cpf'=>$this->cpf])){
-            return true;
+    public function delete($id): bool{
+        if($id){
+            
+            $stmt = $this->prepare("DELETE FROM usuario WHERE id = :id");
+            
+            if( $stmt->execute( [':id'=>$this->id] ) ){
+                return true;    
+            }else{  
+                return false;
+            }
+        }else{
+            return false;
         }
-        return false;
+
     }
 
     public function inserir($dados){
@@ -102,16 +88,4 @@ class Usuario extends TipoPessoa implements iUsuario{
         }
     }
 
-    public function getDados(int $id_usuario): array{
-
-    }
-
-    public function getAll(): array{
-        $stmt = $this->prepare("SELECT * FROM usuario");
-        
-        $stmt->execute();
-         
-        return $stmt->fetchAll(); 
-        
-    }
 }

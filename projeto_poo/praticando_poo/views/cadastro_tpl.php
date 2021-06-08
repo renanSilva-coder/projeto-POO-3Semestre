@@ -9,6 +9,7 @@ if(isset($_POST['cadastrar'])) {
     echo "<script type='text/javascript'> alert('Erro no cadastro'); </script>";
   }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +27,7 @@ if(isset($_POST['cadastrar'])) {
   
   <h1 class="container pt-sm-4">CADASTRE SUA CONTA :-)</h1>
 
-  <form method="post" action="cadastro_tpl.php" enctype="multipart/form-data">
+  <form method="post" action="cadastro_tpl.php">
     <div class="text-danger">
       <?php
       // echo '<p>'; 

@@ -20,7 +20,6 @@ class Main {
     }
 
     private function listaUsuarios(){
-
         $listaCompleta = $this->objUsuario->getAll();
         require 'views/lista.php';
     }

@@ -1,8 +1,8 @@
 <?php
 
-require_once 'DataBase.class.php';
+require_once 'Crud.class.php';
 
-abstract class TipoPessoa extends DataBase{
+abstract class TipoPessoa extends Crud{
 
     protected $id;
     protected $nome;

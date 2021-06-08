@@ -1,6 +1,16 @@
 <?php
     include 'header_tpl.php';
     include 'index_menu_tpl.php';
+    require_once './classes/Usuario.class.php';
+    $objUsuario = new Usuario();
+    if(isset($_GET['apagar'])) {
+        if($objUsuario->delete($_GET)){
+            header("location: /projeto_POO_3Semestre/projeto_poo/praticando_poo/");
+    }else{
+        echo "<script type='text/javascript'> alert('Erro na deleção'); </script>";
+    }
+}
+
 ?>
 <html lang="pt-br">
 
@@ -48,6 +58,8 @@ foreach ($listaCompleta as $usuario) {
           </tbody>";
 
 }
+
+
 ?>
 
 	</table>
@@ -56,3 +68,4 @@ foreach ($listaCompleta as $usuario) {
 
 <?php
 include 'footer_tpl.php';
+
